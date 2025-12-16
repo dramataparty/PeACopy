@@ -14,6 +14,7 @@ use MongoDB\BSON\UTCDateTime;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use Illuminate\Validation\ValidationException;
 
 class foundObjectController extends Controller
 {

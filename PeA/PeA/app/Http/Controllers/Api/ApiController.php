@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Str;
-
+use Illuminate\Validation\ValidationException;
 class ApiController extends Controller
 {
 public function register(Request $request){
