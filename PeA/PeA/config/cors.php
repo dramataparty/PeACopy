@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000', 'http://projetopea.eu', 'https://projetopea.eu'],
 
     'allowed_origins_patterns' => [],
 
