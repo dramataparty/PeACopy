@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PoliceStation;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class PoliceStationController extends Controller
 {
