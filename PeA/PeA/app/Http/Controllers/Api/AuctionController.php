@@ -18,6 +18,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuctionController extends Controller
 {
+    const str auc_not_found = "Leilão não encontrado.";
     public function createAuction(Request $request){
         try {
             $objectId = $request->objectId;
@@ -96,7 +97,7 @@ class AuctionController extends Controller
             } else {
                 return response()->json([
                     "status" => false,
-                    "message" => "Leilão não encontrado.",
+                    "message" => self::auc_not_found,
                     "code" => 404,
                 ], 404);
             }
@@ -116,7 +117,7 @@ public function editAuction(Request $request){
         
         if (!$auction) {
             throw ValidationException::withMessages([
-                'auctionId' => ['Leilão não encontrado.'],
+                'auctionId' => [self::auc_not_found],
             ]);
         }
 
@@ -165,7 +166,7 @@ public function editAuction(Request $request){
         } else {
             return response()->json([
                 "status" => false,
-                "message" => "Leilão não encontrado.",
+                "message" => self::auc_not_found,
                 "code" => "404",
             ], 404);
         }
@@ -199,7 +200,7 @@ public function editAuction(Request $request){
     } else {
         return response()->json([
             "status" => false,
-            "message" => "Leilão não encontrado.",
+            "message" => self::auc_not_found,
         ], 404);
     }
 }

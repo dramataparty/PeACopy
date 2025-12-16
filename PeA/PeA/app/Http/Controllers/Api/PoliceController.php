@@ -14,43 +14,45 @@ class PoliceController extends Controller
 {
     //Register
     public function registerPolice(Request $request){
-        try{
-            $request->validate([
-                'name' => 'required|string',
-                'internalId' => 'required|string|unique:police_user',
-                'password' => 'required|min:8|confirmed',
-                'policeStationId' =>  'required|string|exists:police_station,sigla',
-            ]);
+    try{
+        $request->validate([
+            'name' => 'required|string',
+            'internalId' => 'required|string|unique:police_user',
+            'password' => 'required|min:8|confirmed',
+            'policeStationId' =>  'required|string|exists:police_station,sigla',
+        ]);
 
-            Police::create([
-                "name" => $request->name,
-                "internalId" => $request->internalId,
-                "password" => Hash::make($request->password),
-                "policeStationId" => $request->policeStationId,
-                "account_status" => 'active',
-                "token" => '',
-                "email_verified_at" => '',
-            ]);
+        Police::create([
+            "name" => $request->name,
+            "internalId" => $request->internalId,
+            "password" => Hash::make($request->password),
+            "policeStationId" => $request->policeStationId,
+            "account_status" => 'active',
+            "token" => '',
+            "email_verified_at" => '',
+        ]);
 
+        return response()->json([
+            "status" => true,
+            "message" => "Policia registado com sucesso.",
+            "code" => 200,
+        ]);
+
+    } catch (ValidationException $e){
+        // FIX: Removed the semicolon (;) and corrected the typo ('erros' -> 'errors')
+        if (isset($e->errors()['internalId']) && $e->errors()['internalId'][0] === "Policia com este Id já associado a outra conta.") {
             return response()->json([
-                "status" => true,
-                "message" => "Policia registado com sucesso.",
-                "code" => 200,
-            ]
-
-            );
-
-        } catch (ValidationException $e){
-            if ($e->errors()['internalId'] && $e->erros()['internalId'][0] === "Policia com este Id já associado a outra conta.");
-                return response()->json([
-                    "status" => false,
-                    "message" => "Policia com este Id já associado a outra conta.",
-                    "code" => 400,
-                ]);
-            
-            throw $e;
+                "status" => false,
+                "message" => "Policia com este Id já associado a outra conta.",
+                "code" => 400,
+            ], 400); // Added status code 400 to the response
         }
+        
+        // This line is now reachable if the 'internalId' error is not the one caught above,
+        // or if another type of validation error occurs.
+        throw $e;
     }
+}
     //Login
     public function loginPolice(Request $request)
 {

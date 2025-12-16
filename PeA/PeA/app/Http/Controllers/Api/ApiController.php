@@ -12,6 +12,8 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 class ApiController extends Controller
 {
+    const str usr_not_found = "Utilizador não encontrado.";
+
 public function register(Request $request){
 
     try {
@@ -146,7 +148,7 @@ public function login(Request $request)
         return response()->json([
             "status" => false,
             "code" => 404,
-            "message" => "Utilizador não encontrado",
+            "message" => usr_not_found,
         ], 404);
     }
 }
@@ -258,7 +260,7 @@ public function login(Request $request)
         return response()->json([
             "status" => false,
             "code" => 404,
-            "message" => "Utilizador não encontrado.",
+            "message" => self::usr_not_found,
         ], 404);
     }
 }
@@ -279,7 +281,7 @@ public function login(Request $request)
             return response()->json([
                 "status" => false,
                 "code" => 404,
-                "message" => "Utilizador não encontrado.",
+                "message" => self::usr_not_found,
             ], 404);
         }
     }

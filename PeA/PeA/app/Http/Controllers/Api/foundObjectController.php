@@ -18,6 +18,7 @@ use Illuminate\Validation\ValidationException;
 
 class foundObjectController extends Controller
 {
+    const str obj_not_found = "Objeto não encontrado.";
 public function registerFoundObject(Request $request)
 {
     try {
@@ -88,7 +89,7 @@ public function viewFoundObject(Request $request){
             } else {
                 return response()->json([
                     "status" => false,
-                    "message" => "Objeto não encontrado.",
+                    "message" => self::obj_not_found,
                     "code" => 404,
                 ], 404);
             }
@@ -136,7 +137,7 @@ public function viewFoundObject(Request $request){
         return response()->json([
             "status" => false,
             "code" => 404,
-            "message" => "Objeto não encontrado.",
+            "message" => self::obj_not_found,
         ], 404);
     }
 }
@@ -156,7 +157,7 @@ public function deleteFoundObject(Request $request){
         } else {
             return response()->json([
                 "status" => false,
-                "message" => "Objeto não encontrado.",
+                "message" => self::obj_not_found,
                 "code" => "404",
             ], 404);
         }

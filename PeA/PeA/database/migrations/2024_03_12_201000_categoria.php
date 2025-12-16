@@ -24,6 +24,6 @@ return new class extends Migration
     }
     public function down(): void
     {
-        //
+        //empty because we don't want to delete the table
     }
 };
